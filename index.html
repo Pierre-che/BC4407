@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzAwMCIvPjx0ZXh0IHg9IjkwIiB5PSI2OCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iNDgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5NRDwvdGV4dD48bGluZSB4MT0iMzYiIHkxPSI5MCIgeDI9IjE0NCIgeTI9IjkwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuNSIvPjx0ZXh0IHg9IjkwIiB5PSIxMTUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjE4IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgb3BhY2l0eT0iMC43Ij5CQzwvdGV4dD48dGV4dCB4PSI5MCIgeT0iMTQwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2FhYSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+NDQwNzwvdGV4dD48L3N2Zz4=">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzAwMCIvPjx0ZXh0IHg9IjkwIiB5PSI2OCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iNDgiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5NRDwvdGV4dD48bGluZSB4MT0iMzYiIHkxPSI5MCIgeDI9IjE0NCIgeTI9IjkwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuNSIvPjx0ZXh0IHg9IjkwIiB5PSIxMTUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjE4IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgb3BhY2l0eT0iMC43Ij5CQzwvdGV4dD48dGV4dCB4PSI5MCIgeT0iMTQwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2FhYSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+NDQwNzwvdGV4dD48L3N2Zz4=">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="MD 4407">
+<meta name="theme-color" content="#000000">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Base Contractuelle -- 4407</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+.loading-overlay{position:fixed;inset:0;background:#fff;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.loading-overlay.hidden{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+.spinner{width:32px;height:32px;border:2px solid #EBEBEB;border-top-color:#000;border-radius:50%;animation:lspin .7s linear infinite}
+@keyframes lspin{to{transform:rotate(360deg)}}
+.loading-text{font-size:13px;color:#999;font-family:'DM Mono',monospace}
+.toast{position:fixed;bottom:24px;right:24px;background:#000;color:#fff;padding:10px 16px;border-radius:8px;font-size:13px;z-index:500;opacity:0;transition:opacity .3s;pointer-events:none;max-width:280px}
+.toast.show{opacity:1}
+.toast.ok{background:#1A7F4B}
+.toast.err{background:#C0392B}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:#1A7F4B;display:inline-block;margin-left:5px;vertical-align:middle}
+.sync-dot.busy{background:#C0392B;animation:sdot .8s ease-in-out infinite}
+@keyframes sdot{0%,100%{opacity:1}50%{opacity:.2}}
+</style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+
+:root {
+  --bg: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface2: #F7F7F5;
+  --border: #EBEBEB;
+  --border2: #D5D5D5;
+  --text: #000000;
+  --text2: #555555;
+  --text3: #999999;
+  --accent: #1A7F4B;
+  --accent-light: #EAF5EF;
+  --accent-text: #1A5C35;
+  --warn: #C0392B;
+  --warn-light: #FFF3EE;
+  --danger: #C0392B;
+  --danger-light: #FFF5F5;
+  --blue: #185FA5;
+  --blue-light: #EEF4FF;
+  --purple: #534AB7;
+  --purple-light: #F3EEFF;
+  --sidebar-w: 220px;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --header-h: 56px;
+}
+.sec-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);font-weight:500;padding:12px 20px 6px}
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);background:var(--border);gap:1px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.kpi{background:var(--surface);padding:16px 10px;text-align:center}
+.kpi-val{font-size:26px;font-weight:700;color:var(--text);letter-spacing:-.5px;line-height:1}
+.kpi-pct{font-size:13px;font-weight:500;margin-top:3px}
+.kpi-lbl{font-size:10px;color:var(--text3);margin-top:5px;text-transform:uppercase;letter-spacing:.06em}
+.c-green{color:#1A7F4B}.c-red{color:#C0392B}.c-blue{color:#185FA5}.c-purple{color:#534AB7}
+.rayon-block{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);margin-top:4px}
+.rayon-row-r{display:flex;align-items:center;padding:13px 20px;border-bottom:1px solid var(--border);gap:12px}
+.rayon-row-r:last-child{border-bottom:none}
+.rayon-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.rayon-name-r{font-size:14px;font-weight:500;width:96px;flex-shrink:0}
+.rayon-track-r{flex:1;height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.rayon-fill-r{height:100%;border-radius:2px}
+.rayon-h-r{font-size:13px;font-weight:500;min-width:42px;text-align:right}
+.rayon-n-r{font-size:12px;color:var(--text3);min-width:48px;text-align:right}
+.contrat-block{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);margin-top:4px}
+.contrat-row-r{display:flex;align-items:center;padding:14px 20px;border-bottom:1px solid var(--border);gap:12px}
+.contrat-row-r:last-child{border-bottom:none}
+.contrat-label-r{font-size:14px;font-weight:500;flex:1}
+.contrat-bar-wrap-r{flex:2;height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.contrat-fill-r{height:100%;border-radius:2px}
+.contrat-pct-r{font-size:13px;font-weight:700;min-width:36px;text-align:right}
+.contrat-count-r{font-size:12px;color:var(--text3);min-width:48px;text-align:right}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; min-height: 100vh; }
+
+/* ===================== LAYOUT ===================== */
+.layout { display: flex; min-height: 100vh; }
+
+/* ===================== SIDEBAR (desktop) ===================== */
+.sidebar {
+  width: var(--sidebar-w); min-width: var(--sidebar-w);
+  background: var(--text); display: flex; flex-direction: column;
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 200;
+  transition: transform .25s ease;
+}
+.sidebar-brand { padding: 22px 20px 18px; border-bottom: 1px solid rgba(255,255,255,.08); }
+.sidebar-brand .store { font-size: 10px; color: rgba(255,255,255,.4); letter-spacing: .1em; text-transform: uppercase; font-family: 'DM Mono', monospace; }
+.sidebar-brand .name { font-size: 18px; font-weight: 600; color: #fff; margin-top: 2px; }
+.sidebar-brand .date { font-size: 10px; color: rgba(255,255,255,.3); margin-top: 2px; font-family: 'DM Mono', monospace; }
+.sidebar-nav { padding: 14px 0; flex: 1; overflow-y: auto; }
+.nav-section { padding: 0 12px; margin-bottom: 4px; }
+.nav-label { font-size: 10px; color: rgba(255,255,255,.3); letter-spacing: .1em; text-transform: uppercase; padding: 8px 8px 4px; font-family: 'DM Mono', monospace; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: var(--radius-sm);
+  cursor: pointer; color: rgba(255,255,255,.55); font-size: 13px;
+  transition: all .15s; margin-bottom: 1px; user-select: none;
+}
+.nav-item:hover { background: rgba(255,255,255,.08); color: rgba(255,255,255,.9); }
+.nav-item.active { background: rgba(255,255,255,.13); color: #fff; font-weight: 500; }
+.nav-icon { font-size: 15px; width: 18px; text-align: center; flex-shrink: 0; }
+.sidebar-footer { padding: 14px 20px; border-top: 1px solid rgba(255,255,255,.08); }
+.sidebar-footer p { font-size: 10px; color: rgba(255,255,255,.2); font-family: 'DM Mono', monospace; }
+
+/* ===================== RESET SIDEBAR ===================== */
+.sidebar{display:none}
+.sidebar-overlay{display:none!important}
+.main{margin-left:0!important;padding-top:0;padding-bottom:calc(74px + env(safe-area-inset-bottom, 20px))}
+
+/* ===================== TOP HEADER ===================== */
+.top-header{position:fixed;top:0;left:0;right:0;z-index:200;background:#fff;border-bottom:1px solid #EBEBEB;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+.th-left{display:flex;flex-direction:column}
+.th-store{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#999;font-weight:500}
+.th-name{font-size:17px;font-weight:700;color:#000;letter-spacing:-.3px;line-height:1.1}
+.th-right{display:flex;flex-direction:column;align-items:flex-end}
+.th-date{font-size:11px;color:#999;font-weight:400}
+.th-sync{display:flex;align-items:center;gap:5px;margin-top:2px}
+
+/* ===================== BOTTOM TAB BAR ===================== */
+.tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;background:#fff;border-top:0.5px solid #E0E0E0;display:flex;height:74px;padding-bottom:env(safe-area-inset-bottom,0px)}
+.tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;transition:color .12s;padding-top:6px;border:none;background:transparent;-webkit-tap-highlight-color:transparent;outline:none}
+.tab-item.active{color:#000}
+.tab-item:not(.active){color:#C0C0C0}
+.tab-item:active{opacity:.6}
+.tab-icon{width:26px;height:26px;display:flex;align-items:center;justify-content:center}
+.tab-label{font-size:10px;font-weight:500;letter-spacing:.01em}
+
+/* ===================== PAGE OFFSET ===================== */
+.page{padding-top:60px;padding-bottom:calc(74px + env(safe-area-inset-bottom, 20px))}
+.page-header{padding:8px 20px 0;margin-bottom:0}
+.page-header h1{font-size:20px;font-weight:700;letter-spacing:-.3px}
+.page-header p{font-size:12px;color:var(--text3);margin-top:2px}
+.mobile-header{display:none!important}
+
+/* ===================== MAIN ===================== */
+.main { margin-left: var(--sidebar-w); flex: 1; padding: 0; }
+.page { display: none; }
+.page.active { display: block; }
+
+
+
+
+/* ===================== CARDS ===================== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 14px; }
+.card-title { font-size: 10px; font-weight: 500; color: var(--text3); letter-spacing: .07em; text-transform: uppercase; margin-bottom: 14px; font-family: 'DM Mono', monospace; }
+
+/* ===================== STAT GRID ===================== */
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+.stat-card .lbl { font-size: 10px; color: var(--text3); margin-bottom: 5px; font-family: 'DM Mono', monospace; }
+.stat-card .val { font-size: 24px; font-weight: 600; color: var(--text); font-family: 'DM Mono', monospace; line-height: 1; }
+.stat-card .sub { font-size: 10px; color: var(--text3); margin-top: 3px; }
+.stat-card.green .val { color: var(--accent); }
+.stat-card.warn .val { color: var(--warn); }
+
+/* ===================== BARS ===================== */
+.bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.bar-row:last-child { margin-bottom: 0; }
+.bar-label { font-size: 12px; width: 88px; color: var(--text2); font-weight: 500; flex-shrink: 0; }
+.bar-track { flex: 1; height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; min-width: 40px; }
+.bar-fill { height: 100%; border-radius: 3px; transition: width .4s ease; }
+.bar-info { font-size: 11px; color: var(--text2); min-width: 80px; text-align: right; font-family: 'DM Mono', monospace; white-space: nowrap; }
+
+/* ===================== BADGES ===================== */
+.badge { display: inline-block; padding: 2px 7px; border-radius: 99px; font-size: 11px; font-weight: 500; font-family: 'DM Mono', monospace; white-space: nowrap; }
+.b-cdi { background: var(--accent-light); color: var(--accent-text); }
+.b-cdd { background: var(--warn-light); color: var(--warn); }
+.b-full { background: var(--blue-light); color: var(--blue); }
+.b-part { background: var(--purple-light); color: var(--purple); }
+.b-zero { background: var(--surface2); color: var(--text3); }
+
+/* ===================== RAYON COLORS ===================== */
+.rc-femme { color: #9B3060; } .rc-homme { color: #1A4F8A; }
+.rc-caisse { color: #1A6B4A; } .rc-merch { color: #5A3280; }
+.rc-operations { color: #8B5A10; } .rc-entretien { color: #5A5A5A; }
+
+/* ===================== TABLE ===================== */
+.table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 600px; }
+.tbl th { text-align: left; padding: 10px 12px; background: var(--surface2); color: var(--text3); font-weight: 500; border-bottom: 1px solid var(--border); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; font-family: 'DM Mono', monospace; white-space: nowrap; }
+.tbl td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: middle; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tr:hover td { background: var(--surface2); }
+.tbl .td-mat { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text3); }
+
+/* ===================== MOBILE CARDS (employees) ===================== */
+.emp-cards { display: none; }
+.emp-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px; }
+.emp-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; }
+.emp-card-name { font-weight: 600; font-size: 15px; }
+.emp-card-mat { font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; margin-top: 1px; }
+.emp-card-badges { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
+.emp-card-row { font-size: 12px; color: var(--text2); margin-top: 4px; }
+.emp-card-note { font-size: 11px; color: var(--text3); margin-top: 4px; font-style: italic; }
+
+/* ===================== TOOLBAR ===================== */
+.toolbar { display: flex; gap: 8px; margin-bottom: 12px; align-items: center; flex-wrap: wrap; }
+input[type=text], input[type=number], select, textarea {
+  padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif; font-size: 14px; background: var(--surface);
+  color: var(--text); outline: none; transition: border .15s; -webkit-appearance: none;
+}
+input[type=text]:focus, input[type=number]:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(45,90,61,.08); }
+input.search { flex: 1; min-width: 150px; }
+
+/* ===================== BUTTONS ===================== */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border2); background: var(--surface); cursor: pointer; font-size: 13px; font-weight: 500; color: var(--text); font-family: 'DM Sans', sans-serif; transition: all .15s; white-space: nowrap; user-select: none; }
+.btn:hover { background: var(--surface2); }
+.btn:active { transform: scale(.97); }
+.btn-primary { background: var(--text); color: #fff; border-color: var(--text); }
+.btn-primary:hover { background: #2e2e2b; }
+.btn-danger { color: var(--danger); border-color: #F7C1C1; background: transparent; }
+.btn-danger:hover { background: var(--danger-light); }
+.btn-icon { padding: 6px 8px; border: none; background: transparent; cursor: pointer; color: var(--text3); border-radius: var(--radius-sm); font-size: 15px; transition: all .15s; }
+.btn-icon:hover { background: var(--surface2); color: var(--text); }
+
+/* ===================== MODAL ===================== */
+.modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 300; align-items: flex-end; justify-content: center; }
+.modal-bg.open { display: flex; }
+.modal { background: var(--surface); border-radius: var(--radius) var(--radius) 0 0; border: 1px solid var(--border); padding: 24px 20px 32px; width: 100%; max-width: 480px; max-height: 92vh; overflow-y: auto; }
+.modal-drag { width: 36px; height: 4px; background: var(--border2); border-radius: 2px; margin: 0 auto 20px; }
+.modal h3 { font-size: 17px; font-weight: 600; margin-bottom: 18px; }
+.frow { margin-bottom: 13px; }
+.frow label { display: block; font-size: 10px; color: var(--text3); margin-bottom: 4px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .05em; }
+.frow input, .frow select { width: 100%; font-size: 16px; } /* 16px prevents iOS zoom */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; align-items: center; flex-wrap: wrap; }
+.del-left { margin-right: auto; }
+
+/* ===================== BUDGET ===================== */
+.budget-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 12px; }
+.budget-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
+.budget-card .month-name { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
+.budget-line { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; font-size: 13px; gap: 8px; }
+.budget-line .bl-label { color: var(--text2); flex: 1; }
+.budget-line .bl-val { font-weight: 500; font-family: 'DM Mono', monospace; white-space: nowrap; }
+.bl-val.green { color: var(--accent); } .bl-val.red { color: var(--danger); }
+.inline-num { width: 80px !important; text-align: right; padding: 5px 8px !important; font-size: 13px !important; font-family: 'DM Mono', monospace; flex-shrink: 0; }
+.divider { height: 1px; background: var(--border); margin: 10px 0; }
+.abs-banner { background: var(--warn-light); border: 1px solid #E8C49A; border-radius: var(--radius-sm); padding: 7px 10px; font-size: 12px; color: var(--warn); display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
+.abs-global-bar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.abs-val-display { display: flex; align-items: center; gap: 8px; }
+.abs-big { font-size: 28px; font-weight: 600; font-family: 'DM Mono', monospace; width: 70px; text-align: center; }
+
+/* ===================== SETTINGS ===================== */
+.setting-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.setting-row:last-child { border-bottom: none; }
+.sr-label { font-size: 13px; font-weight: 500; }
+.sr-desc { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.sr-control { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+/* ===================== MISC ===================== */
+.count-label { font-size: 11px; color: var(--text3); text-align: right; margin-top: 8px; font-family: 'DM Mono', monospace; }
+.empty { padding: 28px; text-align: center; color: var(--text3); font-size: 13px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.tag-perso { display: inline-block; background: var(--warn-light); color: var(--warn); font-size: 10px; font-family: 'DM Mono', monospace; padding: 1px 6px; border-radius: 99px; margin-left: 4px; }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .mobile-header { display: flex; }
+  .main { margin-left: 0; padding: 0; }
+  .two-col { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .stat-card { padding: 11px 12px; }
+  .stat-card .val { font-size: 20px; }
+  .table-wrap .tbl { display: none; }
+  .emp-cards { display: block; }
+  .toolbar { gap: 6px; }
+  .toolbar select { flex: 1; }
+  .budget-grid { grid-template-columns: 1fr; }
+  .page-header h1 { font-size: 20px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .modal { border-radius: var(--radius) var(--radius) 0 0; }
+  .abs-global-bar { flex-direction: column; align-items: flex-start; }
+}
+@media (min-width: 769px) {
+  .modal-bg { align-items: center; }
+  .modal { border-radius: var(--radius); max-width: 460px; }
+  .modal-drag { display: none; }
+}
+@media (max-width: 400px) {
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+<style>
+#ptr-indicator{display:none;position:fixed;top:60px;left:0;right:0;z-index:190;justify-content:center;align-items:center;gap:8px;padding:12px;background:#fff;border-bottom:1px solid #EBEBEB}
+#ptr-indicator .ptr-spin{width:18px;height:18px;border:2px solid #EBEBEB;border-top-color:#000;border-radius:50%;animation:spin .7s linear infinite}
+#ptr-indicator span{font-size:12px;color:#999}
+</style>
+<div class="loading-overlay" id="loading"><div class="spinner"></div><div class="loading-text" id="loading-text">Connexion...</div></div>
+<div id="ptr-indicator" style="display:none;position:fixed;top:60px;left:0;right:0;z-index:190;justify-content:center;align-items:center;gap:8px;padding:12px;background:#fff;border-bottom:1px solid #EBEBEB">
+  <div style="width:18px;height:18px;border:2px solid #EBEBEB;border-top-color:#000;border-radius:50%;animation:spin .7s linear infinite"></div>
+  <span style="font-size:12px;color:#999">Relacher pour actualiser</span>
+</div>
+<div class="toast" id="toast"></div>
+        <span style="font-size:11px;color:rgba(255,255,255,.6);letter-spacing:1px">BC 4407</span>
+      </div>
+      <div style="font-size:22px;font-weight:700;letter-spacing:-.4px">Massimo Dutti</div>
+      <div style="font-size:13px;color:#999;margin-top:3px;letter-spacing:.02em">Madeleine -- Base contractuelle</div>
+    </div>
+    <div style="margin-bottom:14px">
+      <div style="font-size:11px;font-weight:500;color:#999;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Email</div>
+      <input type="email" id="auth-email" placeholder="votre@email.com" style="width:100%;padding:13px 14px;border:1px solid #EBEBEB;border-radius:10px;font-size:16px;outline:none;color:#000" />
+    </div>
+    <div style="margin-bottom:20px">
+      <div style="font-size:11px;font-weight:500;color:#999;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Code d'acces</div>
+      <input type="password" id="auth-password" placeholder="Code a 6 chiffres" maxlength="6" inputmode="numeric" style="width:100%;padding:13px 14px;border:1px solid #EBEBEB;border-radius:10px;font-size:20px;letter-spacing:6px;outline:none;color:#000;text-align:center" onkeydown="if(event.key==='Enter')login()" />
+    </div>
+    <button onclick="login()" style="width:100%;padding:14px;background:#000;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;letter-spacing:.02em">Acceder</button>
+    <div id="auth-error" style="color:#C0392B;font-size:13px;margin-top:12px;text-align:center;display:none;background:#FFF5F5;padding:10px;border-radius:8px"></div>
+  </div>
+</div>
+<div id="auth-screen" style="position:fixed;inset:0;background:#fff;z-index:9999;display:flex;align-items:center;justify-content:center;padding:32px">
+  <div style="width:100%;max-width:340px">
+    <div style="text-align:center;margin-bottom:32px">
+      <div style="width:72px;height:72px;background:#000;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 16px;gap:2px">
+        <span style="font-size:18px;font-weight:700;color:#fff;letter-spacing:2px">MD</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.6)">BC 4407</span>
+      </div>
+      <div style="font-size:22px;font-weight:700">Massimo Dutti</div>
+      <div style="font-size:13px;color:#999;margin-top:3px">Madeleine</div>
+    </div>
+    <div style="margin-bottom:14px">
+      <div style="font-size:11px;color:#999;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Email</div>
+      <input type="email" id="auth-email" placeholder="votre@email.com" style="width:100%;padding:13px;border:1px solid #EBEBEB;border-radius:10px;font-size:16px;outline:none" />
+    </div>
+    <div style="margin-bottom:20px">
+      <div style="font-size:11px;color:#999;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Code d'acces</div>
+      <input type="password" id="auth-password" placeholder="------" maxlength="6" inputmode="numeric" style="width:100%;padding:13px;border:1px solid #EBEBEB;border-radius:10px;font-size:20px;letter-spacing:6px;outline:none;text-align:center" onkeydown="if(event.key==='Enter')login()" />
+    </div>
+    <button onclick="login()" style="width:100%;padding:14px;background:#000;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer">Acceder</button>
+    <div id="auth-error" style="color:#C0392B;font-size:13px;margin-top:10px;text-align:center;display:none;background:#FFF5F5;padding:10px;border-radius:8px"></div>
+  </div>
+</div>
+<div class="layout" id="app-layout" style="display:none">
+
+<!-- TOP HEADER -->
+<header class="top-header" onclick="showPage('dashboard',null,'Tableau de bord');setTab('dashboard')" style="cursor:pointer">
+  <div class="th-left">
+    <div class="th-store">4407 -- Massimo Dutti</div>
+    <div class="th-name">Madeleine</div>
+  </div>
+  <div class="th-right">
+    <div class="th-date" id="header-date"></div>
+    <div class="th-sync">
+      <span class="sync-dot" id="sync-dot"></span>
+    </div>
+  </div>
+</header>
+
+<!-- SIDEBAR (kept for desktop, hidden on mobile) -->
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="store">4407 -- Massimo Dutti</div>
+    <div class="name">Madeleine</div>
+    <div class="date" id="current-date"></div>
+  </div>
+  <div class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-label">Vue globale</div>
+      <div class="nav-item active" onclick="showPage('dashboard',this,'Tableau de bord')"><span class="nav-icon">◈</span> Tableau de bord</div>
+      <div class="nav-item" onclick="showPage('budget',this,'Budget mensuel')"><span class="nav-icon">◇</span> Budget mensuel</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Équipe</div>
+      <div class="nav-item" onclick="showPage('employes',this,'Employés')"><span class="nav-icon">◉</span> Employés</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Configuration</div>
+      <div class="nav-item" onclick="showPage('settings',this,'Paramètres')"><span class="nav-icon">◌</span> Paramètres</div>
+    </div>
+  </div>
+  <div class="sidebar-footer"><p>BC 4407 -- v3.0 <span class="sync-dot"></span></p></div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- DASHBOARD -->
+  <div id="page-dashboard" class="page active">
+    <div id="dash-content"></div>
+  </div>
+
+  <!-- BUDGET -->
+  <div id="page-budget" class="page">
+    <div class="page-header">
+      <h1>Budget mensuel</h1>
+      <p>Modifiez les budgets, congés et absentéisme par mois.</p>
+    </div>
+    <div class="card" style="margin-bottom:18px">
+      <div class="card-title">Taux d'absentéisme global</div>
+      <div class="abs-global-bar">
+        <div class="abs-val-display">
+          <input type="number" id="abs-global" class="abs-big" value="10" min="0" max="50" step="0.5" onchange="renderBudget()" />
+          <span style="font-size:20px;color:var(--text2);font-weight:600">%</span>
+        </div>
+        <div style="font-size:13px;color:var(--text2);max-width:380px;line-height:1.6">
+          Appliqué sur les heures après congés pour calculer les <strong>heures réelles disponibles</strong>.<br>
+          Personnalisable mois par mois ci-dessous.
+        </div>
+        <button class="btn" onclick="resetAllAbs()">x Réinitialiser tous</button>
+      </div>
+    </div>
+    <div class="budget-grid" id="budget-grid"></div>
+  </div>
+
+  <!-- EMPLOYES -->
+  <div id="page-employes" class="page">
+    <div class="page-header">
+      <h1>Employés</h1>
+      <p id="emp-count-header"></p>
+    </div>
+    <div class="toolbar">
+      <input type="text" class="search" id="search" placeholder="Rechercher..." oninput="renderEmpTable()" />
+      <select onchange="renderEmpTable()" id="f-rayon">
+        <option value="">Tous les rayons</option>
+        <option>FEMME</option><option>HOMME</option><option>CAISSE</option>
+        <option>OPÉRATIONS</option><option>MERCH</option><option>ENTRETIEN</option>
+      </select>
+      <select onchange="renderEmpTable()" id="f-contrat">
+        <option value="">CDI + CDD</option><option>CDI</option><option>CDD</option>
+      </select>
+      <select onchange="renderEmpTable()" id="f-sort">
+        <option value="">Trier...</option>
+        <option value="nom-asc">Prénom A-Z</option>
+        <option value="nom-desc">Prénom Z-A</option>
+        <option value="rayon-asc">Rayon A-Z</option>
+        <option value="rayon-desc">Rayon Z-A</option>
+        <option value="contrat-asc">CDI d'abord</option>
+        <option value="contrat-desc">CDD d'abord</option>
+        <option value="heures-desc">Heures +</option>
+        <option value="heures-asc">Heures -</option>
+        <option value="datefin-asc">Fin CDD proche</option>
+      </select>
+      <button class="btn btn-primary" onclick="openModal()">+ Ajouter</button>
+    </div>
+
+    <!-- Desktop table -->
+    <div class="table-wrap">
+      <div class="table-scroll">
+        <table class="tbl">
+          <thead><tr>
+            <th>Matricule</th><th>Prénom</th><th>Nom</th><th>Rayon</th><th>Poste</th>
+            <th>Contrat</th><th>Heures/sem</th><th>Note</th><th></th>
+          </tr></thead>
+          <tbody id="emp-table"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Mobile cards -->
+    <div class="emp-cards" id="emp-cards"></div>
+    <div class="count-label" id="count-label"></div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div id="page-settings" class="page">
+    <div class="page-header">
+      <h1>Paramètres</h1>
+      <p>Configuration de l'application</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Absentéisme</div>
+      <div class="setting-row">
+        <div>
+          <div class="sr-label">Taux par défaut</div>
+          <div class="sr-desc">Appliqué sur les heures après congés</div>
+        </div>
+        <div class="sr-control">
+          <input type="number" style="width:70px;text-align:center;font-size:16px;font-family:'DM Mono',monospace;font-weight:600" id="abs-setting" value="10" min="0" max="50" step="0.5" onchange="syncAbs()" />
+          <span style="font-weight:600;color:var(--text2)">%</span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Export</div>
+      <div class="setting-row">
+        <div>
+          <div class="sr-label">Exporter les employés</div>
+          <div class="sr-desc">Fichier CSV avec matricule et toutes les données</div>
+        </div>
+        <button class="btn" onclick="exportCSV()">↓ Export CSV</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">À propos</div>
+      <div class="setting-row">
+        <div>
+          <div class="sr-label">Version</div>
+          <div class="sr-desc">Base contractuelle magasin 4407 -- Avril 2026</div>
+        </div>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text3)">v3.0</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Session</div>
+      <div class="setting-row">
+        <div>
+          <div class="sr-label">Se deconnecter</div>
+          <div class="sr-desc">Retour a l'ecran de connexion</div>
+        </div>
+        <button class="btn btn-danger" onclick="logout()">Deconnexion</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- BOTTOM TAB BAR -->
+<nav class="tab-bar" id="tab-bar">
+  <button class="tab-item active" id="tab-dashboard" onclick="showPage('dashboard', document.getElementById('nav-dashboard'), 'Tableau de bord');setTab('dashboard')">
+    <div class="tab-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    </div>
+    <span class="tab-label">Accueil</span>
+  </button>
+  <button class="tab-item" id="tab-budget" onclick="showPage('budget', document.getElementById('nav-budget'), 'Budget');setTab('budget')">
+    <div class="tab-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+    </div>
+    <span class="tab-label">Budget</span>
+  </button>
+  <button class="tab-item" id="tab-employes" onclick="showPage('employes', document.getElementById('nav-employes'), 'Employés');setTab('employes')">
+    <div class="tab-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/><path d="M19 8v6M22 11h-6" stroke-width="1.8"/></svg>
+    </div>
+    <span class="tab-label">Équipe</span>
+  </button>
+  <button class="tab-item" id="tab-settings" onclick="showPage('settings', document.getElementById('nav-settings'), 'Paramètres');setTab('settings')">
+    <div class="tab-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </div>
+    <span class="tab-label">Réglages</span>
+  </button>
+</nav>
+
+<!-- Hidden nav anchors for showPage compatibility -->
+<div style="display:none">
+  <div id="nav-dashboard"></div>
+  <div id="nav-budget"></div>
+  <div id="nav-employes"></div>
+  <div id="nav-settings"></div>
+</div>
+
+</div>
+
+<!-- CDD PANEL -->
+<div class="modal-bg" id="cdd-panel">
+  <div class="modal" style="max-height:85vh">
+    <div class="modal-drag"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <h3 style="margin:0">Contrats CDD</h3>
+      <button onclick="closeCDDPanel()" style="background:none;border:none;font-size:22px;cursor:pointer;color:#999;padding:0 4px">x</button>
+    </div>
+    <div id="cdd-panel-content"></div>
+  </div>
+</div>
+
+<!-- MODAL EMPLOYE -->
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <div class="modal-drag"></div>
+    <h3 id="modal-title">Ajouter un employé</h3>
+    <div class="form-grid">
+      <div class="frow">
+        <label>Matricule</label>
+        <input type="text" id="f-matricule" placeholder="ex: 12345" maxlength="10" />
+      </div>
+      <div class="frow">
+        <label>Prénom</label>
+        <input type="text" id="f-nom" placeholder="ex: Pierre" />
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="frow">
+        <label>Nom de famille</label>
+        <input type="text" id="f-nomfamille" placeholder="ex: Dupont" />
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="frow">
+        <label>Type de contrat</label>
+        <select id="f-contrat-m" onchange="toggleDateFin(this.value)"><option>CDI</option><option>CDD</option></select>
+      </div>
+      <div class="frow">
+        <label>Poste / rôle</label>
+        <input type="text" id="f-poste" placeholder="ex: Adjoint, VC, DM..." />
+      </div>
+    </div>
+
+    <!-- Toggle multi-rayon -->
+    <div style="display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:12px;cursor:pointer" onclick="toggleMultiRayon()">
+      <div id="toggle-mr" style="width:36px;height:20px;border-radius:10px;background:var(--border2);position:relative;transition:background .2s;flex-shrink:0">
+        <div id="toggle-knob" style="width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)"></div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:500">Vendeur multi-rayon</div>
+        <div style="font-size:11px;color:var(--text3)">Répartition des heures sur deux rayons</div>
+      </div>
+    </div>
+
+    <!-- Rayon simple -->
+    <div id="rayon-simple">
+      <div class="form-grid">
+        <div class="frow">
+          <label>Rayon</label>
+          <select id="f-rayon-m">
+            <option>FEMME</option><option>HOMME</option><option>CAISSE</option>
+            <option>OPÉRATIONS</option><option>MERCH</option><option>ENTRETIEN</option>
+          </select>
+        </div>
+        <div class="frow">
+          <label>Heures hebdo</label>
+          <input type="number" id="f-heures" placeholder="ex: 35" min="0" max="48" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Rayon multi -->
+    <div id="rayon-multi" style="display:none">
+      <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;margin-bottom:12px">
+        <div style="font-size:11px;color:var(--text3);margin-bottom:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.05em">Rayon principal</div>
+        <div class="form-grid">
+          <div class="frow" style="margin:0">
+            <label>Rayon</label>
+            <select id="f-rayon-m2">
+              <option>FEMME</option><option>HOMME</option><option>CAISSE</option>
+              <option>OPÉRATIONS</option><option>MERCH</option><option>ENTRETIEN</option>
+            </select>
+          </div>
+          <div class="frow" style="margin:0">
+            <label>Heures hebdo</label>
+            <input type="number" id="f-heures-m2" placeholder="ex: 21" min="0" max="48" />
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;margin-bottom:12px">
+        <div style="font-size:11px;color:var(--text3);margin-bottom:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.05em">Rayon secondaire</div>
+        <div class="form-grid">
+          <div class="frow" style="margin:0">
+            <label>Rayon</label>
+            <select id="f-rayon2">
+              <option>FEMME</option><option>HOMME</option><option>CAISSE</option>
+              <option>OPÉRATIONS</option><option>MERCH</option><option>ENTRETIEN</option>
+            </select>
+          </div>
+          <div class="frow" style="margin:0">
+            <label>Heures hebdo</label>
+            <input type="number" id="f-heures2" placeholder="ex: 14" min="0" max="48" />
+          </div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text2);text-align:center" id="total-heures-multi"></div>
+    </div>
+
+    <div class="frow">
+      <label>Note</label>
+      <input type="text" id="f-note" placeholder="ex: Mission, Remplacement, CSS..." />
+    </div>
+    <div class="frow" id="date-fin-row" style="display:none">
+      <label>Date de fin de contrat (CDD)</label>
+      <input type="date" id="f-datefin" style="width:100%;font-size:16px" />
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-danger del-left" id="btn-del" onclick="deleteEmp()" style="display:none">Supprimer</button>
+      <button class="btn" onclick="closeModal()">Annuler</button>
+      <button class="btn btn-primary" onclick="saveEmp()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const RC = {FEMME:"#C04878",HOMME:"#1A6AAA",CAISSE:"#1A8050",MERCH:"#6A3AA0","OPÉRATIONS":"#AA6A10",ENTRETIEN:"#707070"};
+const RCC = {FEMME:"rc-femme",HOMME:"rc-homme",CAISSE:"rc-caisse",MERCH:"rc-merch","OPÉRATIONS":"rc-operations",ENTRETIEN:"rc-entretien"};
+const MOIS = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
+const JOURS = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+let budgets = MOIS.map((m,i)=>({
+  mois:m, jours:JOURS[i],
+  budget: i===3 ? 6738 : Math.round(6738*JOURS[i]/30),
+  conges: i===3 ? 228  : Math.round(228*JOURS[i]/30),
+  absPerso: null,
+}));
+
+let employees = [
+  {id:1,matricule:"",nom:"Aziza",rayon:"FEMME",poste:"DM",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:2,matricule:"",nom:"Karine",rayon:"FEMME",poste:"Adjointe",contrat:"CDI",heures:0,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:3,matricule:"",nom:"Fati",rayon:"FEMME",poste:"Adjointe",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:4,matricule:"",nom:"Nada",rayon:"FEMME",poste:"VC/tutrice",contrat:"CDI",heures:0,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:5,matricule:"",nom:"Passang",rayon:"FEMME",poste:"",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:6,matricule:"",nom:"Erna",rayon:"FEMME",poste:"",contrat:"CDI",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:7,matricule:"",nom:"Charlotte F",rayon:"FEMME",poste:"",contrat:"CDI",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:8,matricule:"",nom:"Tenzin",rayon:"FEMME",poste:"Resp CH",contrat:"CDI",heures:35,note:"Potentielle",multiRayon:false,rayon2:"",heures2:0},
+  {id:9,matricule:"",nom:"Chloé",rayon:"FEMME",poste:"",contrat:"CDI",heures:10,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:10,matricule:"",nom:"Simim",rayon:"FEMME",poste:"",contrat:"CDI",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:11,matricule:"",nom:"Chalita",rayon:"FEMME",poste:"",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:12,matricule:"",nom:"Maboubé",rayon:"FEMME",poste:"",contrat:"CDI",heures:0,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:13,matricule:"",nom:"Fanny",rayon:"FEMME",poste:"Style advisor",contrat:"CDI",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:14,matricule:"",nom:"Céline",rayon:"FEMME",poste:"",contrat:"CDI",heures:14,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:15,matricule:"",nom:"Oumaima",rayon:"FEMME",poste:"",contrat:"CDI",heures:20,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:16,matricule:"",nom:"Charlotte N",rayon:"FEMME",poste:"VC",contrat:"CDI",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:17,matricule:"",nom:"Maxime",rayon:"FEMME",poste:"",contrat:"CDI",heures:14,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:18,matricule:"",nom:"Flavie",rayon:"FEMME",poste:"",contrat:"CDI",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:19,matricule:"",nom:"Karla",rayon:"FEMME",poste:"",contrat:"CDI",heures:14,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:20,matricule:"",nom:"Miriam",rayon:"FEMME",poste:"",contrat:"CDI",heures:18,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:21,matricule:"",nom:"Simo",rayon:"FEMME",poste:"",contrat:"CDI",heures:35,note:"Mission",multiRayon:false,rayon2:"",heures2:0},
+  {id:22,matricule:"",nom:"Paola",rayon:"FEMME",poste:"",contrat:"CDD",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:23,matricule:"",nom:"Alicia",rayon:"FEMME",poste:"",contrat:"CDD",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:24,matricule:"",nom:"Hasna",rayon:"FEMME",poste:"",contrat:"CDD",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:25,matricule:"",nom:"Elilde",rayon:"FEMME",poste:"",contrat:"CDD",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:26,matricule:"",nom:"Pierre",rayon:"HOMME",poste:"Adjoint H",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:27,matricule:"",nom:"Ines",rayon:"HOMME",poste:"",contrat:"CDI",heures:35,note:"Mission",multiRayon:false,rayon2:"",heures2:0},
+  {id:28,matricule:"",nom:"Hassan",rayon:"HOMME",poste:"V/tuteur",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:29,matricule:"",nom:"Elena",rayon:"HOMME",poste:"VC",contrat:"CDI",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:30,matricule:"",nom:"Neerja",rayon:"HOMME",poste:"V",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:31,matricule:"",nom:"Ali",rayon:"HOMME",poste:"Tailoring",contrat:"CDI",heures:0,note:"CSS",multiRayon:false,rayon2:"",heures2:0},
+  {id:32,matricule:"",nom:"Anna",rayon:"HOMME",poste:"",contrat:"CDI",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:33,matricule:"",nom:"Mario",rayon:"HOMME",poste:"VC",contrat:"CDI",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:34,matricule:"",nom:"Polina",rayon:"HOMME",poste:"",contrat:"CDI",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:35,matricule:"",nom:"Maria",rayon:"HOMME",poste:"",contrat:"CDI",heures:0,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:36,matricule:"",nom:"Elisabeth",rayon:"HOMME",poste:"",contrat:"CDI",heures:21,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:37,matricule:"",nom:"Robin",rayon:"HOMME",poste:"",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:38,matricule:"",nom:"Karla",rayon:"HOMME",poste:"",contrat:"CDI",heures:21,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:39,matricule:"",nom:"Lyza",rayon:"HOMME",poste:"",contrat:"CDI",heures:24,note:"À remplacer dès le 13",multiRayon:false,rayon2:"",heures2:0},
+  {id:40,matricule:"",nom:"Absa",rayon:"HOMME",poste:"",contrat:"CDD",heures:18,note:"Remplacement Maria",multiRayon:false,rayon2:"",heures2:0},
+  {id:41,matricule:"",nom:"Maelle",rayon:"CAISSE",poste:"CP",contrat:"CDI",heures:0,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:42,matricule:"",nom:"Houda",rayon:"CAISSE",poste:"VC",contrat:"CDI",heures:0,note:"AM",multiRayon:false,rayon2:"",heures2:0},
+  {id:43,matricule:"",nom:"Iago",rayon:"CAISSE",poste:"VC",contrat:"CDI",heures:0,note:"CSS",multiRayon:false,rayon2:"",heures2:0},
+  {id:44,matricule:"",nom:"Gaelle",rayon:"CAISSE",poste:"VC",contrat:"CDI",heures:12,note:"CSS",multiRayon:false,rayon2:"",heures2:0},
+  {id:45,matricule:"",nom:"Karima",rayon:"CAISSE",poste:"VC",contrat:"CDI",heures:18,note:"Mi-temps",multiRayon:false,rayon2:"",heures2:0},
+  {id:46,matricule:"",nom:"Milan",rayon:"CAISSE",poste:"VC",contrat:"CDI",heures:14,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:47,matricule:"",nom:"Maeva",rayon:"CAISSE",poste:"VC",contrat:"CDI",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:48,matricule:"",nom:"Mattéo",rayon:"CAISSE",poste:"VC",contrat:"CDI",heures:0,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:49,matricule:"",nom:"Vera",rayon:"CAISSE",poste:"",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:50,matricule:"",nom:"Nina",rayon:"CAISSE",poste:"VC",contrat:"CDI",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:51,matricule:"",nom:"Shirley",rayon:"OPÉRATIONS",poste:"Adj OP",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:52,matricule:"",nom:"Sagar",rayon:"OPÉRATIONS",poste:"",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:53,matricule:"",nom:"Ouarda",rayon:"OPÉRATIONS",poste:"",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:54,matricule:"",nom:"Inna",rayon:"OPÉRATIONS",poste:"",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:55,matricule:"",nom:"Shrutika",rayon:"OPÉRATIONS",poste:"",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:56,matricule:"",nom:"Zacharia",rayon:"OPÉRATIONS",poste:"",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:57,matricule:"",nom:"Angila",rayon:"OPÉRATIONS",poste:"",contrat:"CDI",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:58,matricule:"",nom:"Karl",rayon:"OPÉRATIONS",poste:"",contrat:"CDI",heures:18,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:59,matricule:"",nom:"Dhyana",rayon:"OPÉRATIONS",poste:"",contrat:"CDI",heures:20,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:60,matricule:"",nom:"Sandy",rayon:"OPÉRATIONS",poste:"",contrat:"CDI",heures:18,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:61,matricule:"",nom:"Yeshi",rayon:"OPÉRATIONS",poste:"",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:62,matricule:"",nom:"Paolo",rayon:"OPÉRATIONS",poste:"",contrat:"CDI",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:63,matricule:"",nom:"Alex",rayon:"OPÉRATIONS",poste:"",contrat:"CDI",heures:14,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:64,matricule:"",nom:"Ngawa",rayon:"OPÉRATIONS",poste:"",contrat:"CDD",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:65,matricule:"",nom:"Lenny",rayon:"OPÉRATIONS",poste:"",contrat:"CDD",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:66,matricule:"",nom:"Mathilde",rayon:"MERCH",poste:"Resp Visuel",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:67,matricule:"",nom:"Agathe",rayon:"MERCH",poste:"Visuel",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:68,matricule:"",nom:"Jimin",rayon:"MERCH",poste:"Visuel",contrat:"CDI",heures:0,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:69,matricule:"",nom:"Julie",rayon:"MERCH",poste:"Visuel",contrat:"CDI",heures:0,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:70,matricule:"",nom:"Emma",rayon:"MERCH",poste:"",contrat:"CDI",heures:23,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:71,matricule:"",nom:"Cristina",rayon:"MERCH",poste:"Visuel",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:72,matricule:"",nom:"Miranda",rayon:"MERCH",poste:"Visuel",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:73,matricule:"",nom:"Sheryleen",rayon:"MERCH",poste:"",contrat:"CDD",heures:24,note:"",multiRayon:false,rayon2:"",heures2:0},
+  {id:74,matricule:"",nom:"Angelina",rayon:"ENTRETIEN",poste:"TS",contrat:"CDI",heures:35,note:"",multiRayon:false,rayon2:"",heures2:0},
+];
+let nextId = 100, editId = null, isMultiRayon = false;
+
+// ============================================================
+// MULTI-RAYON TOGGLE
+// ============================================================
+function toggleMultiRayon(force) {
+  isMultiRayon = force !== undefined ? force : !isMultiRayon;
+  const tog = document.getElementById("toggle-mr");
+  const knob = document.getElementById("toggle-knob");
+  const simple = document.getElementById("rayon-simple");
+  const multi = document.getElementById("rayon-multi");
+  tog.style.background = isMultiRayon ? "var(--accent)" : "var(--border2)";
+  knob.style.left = isMultiRayon ? "18px" : "2px";
+  simple.style.display = isMultiRayon ? "none" : "block";
+  multi.style.display = isMultiRayon ? "block" : "none";
+}
+
+function updateTotalHeuresMulti() {
+  const h1 = parseInt(document.getElementById("f-heures-m2").value)||0;
+  const h2 = parseInt(document.getElementById("f-heures2").value)||0;
+  const total = h1+h2;
+  document.getElementById("total-heures-multi").textContent =
+    total > 0 ? `Total : ${total}h/sem ${total>=35?"- Temps complet":"- Temps partiel"}` : "";
+}
+// Live update total
+setTimeout(()=>{
+  document.getElementById("f-heures-m2").addEventListener("input", updateTotalHeuresMulti);
+  document.getElementById("f-heures2").addEventListener("input", updateTotalHeuresMulti);
+},200);
+
+// ============================================================
+// HELPERS -- expand multi-rayon employees for display
+// ============================================================
+function expandedList(list) {
+  // Returns rows for display: multi-rayon emp appears twice
+  const rows = [];
+  list.forEach(e => {
+    if(e.multiRayon && e.rayon2) {
+      rows.push({...e, _displayRayon: e.rayon, _displayHeures: e.heures});
+      rows.push({...e, _displayRayon: e.rayon2, _displayHeures: e.heures2, _secondary: true});
+    } else {
+      rows.push({...e, _displayRayon: e.rayon, _displayHeures: e.heures});
+    }
+  });
+  return rows;
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showPage(id, el, title) {
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".nav-item").forEach(n=>n.classList.remove("active"));
+  document.getElementById("page-"+id).classList.add("active");
+  if(el && el.classList && el.classList.contains("nav-item")) el.classList.add("active");
+  closeSidebar();
+  if(id==="dashboard") renderDashboard();
+  if(id==="budget") renderBudget();
+  if(id==="employes") renderEmpTable();
+}
+function openCDDPanel(){
+  const today=new Date(); today.setHours(0,0,0,0);
+  const cdds=employees
+    .filter(e=>e.contrat==="CDD")
+    .map(e=>{
+      const fin=e.dateFin?new Date(e.dateFin):null;
+      const jours=fin?Math.round((fin-today)/(1000*60*60*24)):null;
+      return{...e,fin,jours};
+    })
+    .sort((a,b)=>{
+      if(a.jours===null&&b.jours===null) return 0;
+      if(a.jours===null) return 1;
+      if(b.jours===null) return -1;
+      return a.jours-b.jours;
+    });
+
+  const html=cdds.map(e=>{
+    const idx=employees.findIndex(x=>x.id===e.id);
+    let badge="";
+    let dateStr="--";
+    let joursStr="Pas de date";
+    let color="#999";
+    let bg="#F7F7F5";
+    let border="#EBEBEB";
+
+    if(e.jours!==null){
+      dateStr=e.fin.toLocaleDateString("fr-FR");
+      if(e.jours<0){
+        joursStr="Termine il y a "+Math.abs(e.jours)+"j";
+        color="#C0392B"; bg="#FFF5F5"; border="#FFCCCC";
+      } else if(e.jours===0){
+        joursStr="Termine aujourd'hui";
+        color="#C0392B"; bg="#FFF5F5"; border="#FFCCCC";
+      } else if(e.jours<=7){
+        joursStr="Dans "+e.jours+" jour"+(e.jours>1?"s":"");
+        color="#C0392B"; bg="#FFF5F5"; border="#FFCCCC";
+      } else if(e.jours<=30){
+        joursStr="Dans "+e.jours+" jours";
+        color="#E67E22"; bg="#FFF8F0"; border="#F0D0A0";
+      } else {
+        joursStr="Dans "+e.jours+" jours";
+        color="#1A7F4B"; bg="#F0FBF5"; border="#A8DEBC";
+      }
+    }
+
+    return `<div onclick="closeCDDPanel();editEmpIdx(${idx})" style="background:${bg};border:1px solid ${border};border-radius:10px;padding:13px 16px;display:flex;align-items:center;gap:12px;margin-bottom:8px;cursor:pointer">
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:600">${e.nom}${e.nomFamille?" "+e.nomFamille.toUpperCase():""}</div>
+        <div style="font-size:11px;color:#999;margin-top:2px">${e.rayon.charAt(0)+e.rayon.slice(1).toLowerCase()}${e.poste?" -- "+e.poste:""}</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-size:13px;font-weight:700;color:${color}">${joursStr}</div>
+        <div style="font-size:11px;color:#999;margin-top:1px">${dateStr}</div>
+      </div>
+      <div style="color:#ccc;font-size:16px">></div>
+    </div>`;
+  }).join("");
+
+  document.getElementById("cdd-panel-content").innerHTML = html ||
+    `<div style="text-align:center;color:#999;padding:24px;font-size:13px">Aucun CDD</div>`;
+  document.getElementById("cdd-panel").classList.add("open");
+}
+
+function closeCDDPanel(){
+  document.getElementById("cdd-panel").classList.remove("open");
+}
+
+// Close on backdrop click
+document.addEventListener("DOMContentLoaded",()=>{
+  document.getElementById("cdd-panel").addEventListener("click",function(e){
+    if(e.target===this) closeCDDPanel();
+  });
+});
+
+
+  document.getElementById("f-rayon").value = rayon;
+  showPage("employes", null, "Équipe");
+  setTab("employes");
+  renderEmpTable();
+  window.scrollTo(0,0);
+}
+function resetRayonFilter() {
+  document.getElementById("f-rayon").value = "";
+  renderEmpTable();
+}
+function setTab(id) {
+  document.querySelectorAll(".tab-item").forEach(t=>t.classList.remove("active"));
+  const t=document.getElementById("tab-"+id);
+  if(t) t.classList.add("active");
+}
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("open");
+  document.getElementById("sidebar-overlay").classList.toggle("open");
+}
+function closeSidebar() {
+  document.getElementById("sidebar").classList.remove("open");
+  document.getElementById("sidebar-overlay").classList.remove("open");
+}
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+function fmt(n) { return (+n).toLocaleString('fr-FR',{maximumFractionDigits:1}); }
+
+function renderDashboard() {
+  const tH=e=>e.multiRayon?(e.heures||0)+(e.heures2||0):(e.heures||0);
+  const active=employees.filter(e=>tH(e)>0);
+  const total=active.length;
+  const cdi=active.filter(e=>e.contrat==="CDI").length;
+  const cdd=active.filter(e=>e.contrat==="CDD").length;
+  const plein=active.filter(e=>tH(e)>=35).length;
+  const partiel=active.filter(e=>tH(e)>0&&tH(e)<35).length;
+  const totalHSem=active.reduce((s,e)=>s+tH(e),0);
+  const inactifs=employees.filter(e=>tH(e)===0).length;
+  const pctCDI=total?Math.round(cdi/total*100):0;
+  const pctCDD=total?Math.round(cdd/total*100):0;
+  const pctPlein=total?Math.round(plein/total*100):0;
+  const pctPartiel=total?Math.round(partiel/total*100):0;
+
+  const RAYONS=["FEMME","HOMME","CAISSE","MERCH","OPÉRATIONS","ENTRETIEN"];
+  function rayonH(r){return employees.reduce((s,e)=>{if(e.rayon===r)s+=e.heures||0;if(e.multiRayon&&e.rayon2===r)s+=e.heures2||0;return s;},0);}
+  function rayonN(r){return employees.filter(e=>(e.rayon===r&&tH(e)>0)||(e.multiRayon&&e.rayon2===r&&(e.heures2||0)>0)).length;}
+  const maxH=Math.max(...RAYONS.map(r=>rayonH(r)),1);
+
+  document.getElementById("dash-content").innerHTML=`
+    <div style="padding:10px 20px 0">
+      <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);font-weight:500;margin-bottom:4px">Magasin 4407</div>
+      <div style="font-size:24px;font-weight:700;letter-spacing:-.4px">Massimo Dutti <span style="font-weight:400;color:var(--text3)">Madeleine</span></div>
+      <div style="font-size:13px;color:var(--text3);margin-top:4px">${new Date().toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long",year:"numeric"})}</div>
+    </div>
+
+    <div class="sec-label">Effectif actif</div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-val">${total}</div><div class="kpi-lbl">Total</div>${inactifs?`<div style="font-size:10px;color:var(--text3);margin-top:3px">${inactifs} à 0h</div>`:""}</div>
+      <div class="kpi"><div class="kpi-val c-green">${cdi}</div><div class="kpi-pct c-green">${pctCDI}%</div><div class="kpi-lbl">CDI</div></div>
+      <div class="kpi" onclick="openCDDPanel()" style="cursor:pointer"><div class="kpi-val c-red">${cdd}</div><div class="kpi-pct c-red">${pctCDD}%</div><div class="kpi-lbl">CDD</div></div>
+    </div>
+
+    <div class="sec-label">Temps de travail</div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-val">${fmt(totalHSem)}</div><div class="kpi-lbl">H / semaine</div></div>
+      <div class="kpi"><div class="kpi-val c-blue">${plein}</div><div class="kpi-pct c-blue">${pctPlein}%</div><div class="kpi-lbl">Complets</div></div>
+      <div class="kpi"><div class="kpi-val c-purple">${partiel}</div><div class="kpi-pct c-purple">${pctPartiel}%</div><div class="kpi-lbl">Partiels</div></div>
+    </div>
+
+    <div class="sec-label">Heures par rayon</div>
+    <div class="rayon-block">
+      ${RAYONS.map(r=>`
+      <div class="rayon-row-r" onclick="goToRayon('${r}')" style="cursor:pointer">
+        <div class="rayon-dot" style="background:${RC[r]}"></div>
+        <div class="rayon-name-r">${r.charAt(0)+r.slice(1).toLowerCase()}</div>
+        <div class="rayon-track-r"><div class="rayon-fill-r" style="width:${Math.round(rayonH(r)/maxH*100)}%;background:${RC[r]}"></div></div>
+        <div class="rayon-h-r">${fmt(rayonH(r))}h</div>
+        <div class="rayon-n-r">${rayonN(r)} pers.</div>
+        <div style="color:#CCCCCC;font-size:18px;margin-left:4px">></div>
+      </div>`).join("")}
+    </div>
+
+    <div class="sec-label">Répartition détaillée</div>
+    <div class="contrat-block">
+      <div class="contrat-row-r"><div class="contrat-label-r">CDI</div><div class="contrat-bar-wrap-r"><div class="contrat-fill-r" style="width:${pctCDI}%;background:#1A7F4B"></div></div><div class="contrat-pct-r c-green">${pctCDI}%</div><div class="contrat-count-r">${cdi} pers.</div></div>
+      <div class="contrat-row-r"><div class="contrat-label-r">CDD</div><div class="contrat-bar-wrap-r"><div class="contrat-fill-r" style="width:${Math.min(pctCDD*4,100)}%;background:#C0392B"></div></div><div class="contrat-pct-r c-red">${pctCDD}%</div><div class="contrat-count-r">${cdd} pers.</div></div>
+      <div class="contrat-row-r"><div class="contrat-label-r">Temps complets</div><div class="contrat-bar-wrap-r"><div class="contrat-fill-r" style="width:${pctPlein}%;background:#185FA5"></div></div><div class="contrat-pct-r c-blue">${pctPlein}%</div><div class="contrat-count-r">${plein} pers.</div></div>
+      <div class="contrat-row-r"><div class="contrat-label-r">Temps partiels</div><div class="contrat-bar-wrap-r"><div class="contrat-fill-r" style="width:${pctPartiel}%;background:#534AB7"></div></div><div class="contrat-pct-r c-purple">${pctPartiel}%</div><div class="contrat-count-r">${partiel} pers.</div></div>
+    </div>
+    <div style="height:32px"></div>
+  `;
+
+  // CDD alerts
+  const alerts=cddAlerts();
+  if(alerts.length>0){
+    const alertHtml=alerts.map(e=>{
+      const color=e.joursRestants<0?"#C0392B":e.joursRestants<=7?"#C0392B":e.joursRestants<=15?"#E67E22":"#F39C12";
+      const bg=e.joursRestants<=7?"#FFF5F5":"#FFF8F0";
+      const border=e.joursRestants<=7?"#FFCCCC":"#F0D0A0";
+      const label=e.joursRestants<0?"Termine il y a "+Math.abs(e.joursRestants)+"j":e.joursRestants===0?"Termine aujourd'hui":e.joursRestants+"j restants";
+      const dateStr=e.dateFin?new Date(e.dateFin).toLocaleDateString("fr-FR"):"";
+      const idx=employees.findIndex(x=>x.id===e.id);
+      return "<div onclick='editEmpIdx("+idx+")' style='background:"+bg+";border:1px solid "+border+";border-radius:10px;padding:13px 16px;display:flex;align-items:center;gap:12px;margin-bottom:8px;cursor:pointer'>"
+        +"<div style='width:8px;height:8px;border-radius:50%;background:"+color+";flex-shrink:0'></div>"
+        +"<div style='flex:1'>"
+        +"<div style='font-size:14px;font-weight:600'>"+e.nom+(e.nomFamille?" "+e.nomFamille.toUpperCase():"")+"</div>"
+        +"<div style='font-size:11px;color:#999;margin-top:1px'>"+e.rayon.charAt(0)+e.rayon.slice(1).toLowerCase()+" -- CDD</div>"
+        +"</div>"
+        +"<div style='text-align:right;flex-shrink:0'>"
+        +"<div style='font-size:13px;font-weight:700;color:"+color+"'>"+label+"</div>"
+        +"<div style='font-size:11px;color:#999;margin-top:1px'>"+dateStr+"</div>"
+        +"</div>"
+        +"<div style='color:#ccc;font-size:18px;margin-left:4px'>></div>"
+        +"</div>";
+    }).join("");
+    const alertDiv=document.createElement("div");
+    alertDiv.style.cssText="padding:0 20px 24px";
+    alertDiv.innerHTML="<div style='font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#999;font-weight:500;padding:16px 0 10px'>CDD bientot termines</div>"+alertHtml;
+    document.getElementById("dash-content").appendChild(alertDiv);
+  }
+}
+
+// ============================================================
+// BUDGET
+// ============================================================
+function getAbs() { return parseFloat(document.getElementById("abs-global").value)||10; }
+
+function renderBudget() {
+  const absG=getAbs();
+  const totalHSem=employees.reduce((s,e)=>s+e.heures,0);
+  document.getElementById("budget-grid").innerHTML=budgets.map((b,i)=>{
+    const rate=b.absPerso!==null?b.absPerso:absG;
+    const hTheo=b.jours/7*totalHSem;
+    const hConges=hTheo-b.conges;
+    const hReelles=hConges*(1-rate/100);
+    const ecart=hReelles-b.budget;
+    const perso=b.absPerso!==null;
+    return`<div class="budget-card">
+      <div class="month-name">${b.mois}${perso?`<span class="tag-perso">personnalisé</span>`:""}</div>
+      ${perso?`<div class="abs-banner">! Absentéisme : ${rate}%</div>`:""}
+      <div class="budget-line">
+        <span class="bl-label">Budget heures</span>
+        <input class="inline-num" type="number" value="${b.budget}" onchange="upd(${i},'budget',this.value)" />
+      </div>
+      <div class="budget-line">
+        <span class="bl-label">Jours du mois</span>
+        <input class="inline-num" type="number" value="${b.jours}" onchange="upd(${i},'jours',this.value)" />
+      </div>
+      <div class="budget-line">
+        <span class="bl-label">Congés (h)</span>
+        <input class="inline-num" type="number" value="${b.conges}" onchange="upd(${i},'conges',this.value)" />
+      </div>
+      <div class="budget-line">
+        <span class="bl-label">Absentéisme</span>
+        <div style="display:flex;align-items:center;gap:4px">
+          <input class="inline-num" type="number" value="${rate}" step="0.5" style="width:60px" onchange="upd(${i},'absPerso',this.value)" />
+          <span style="font-size:12px;color:var(--text3)">%</span>
+          ${perso?`<button class="btn-icon" onclick="resetAbs(${i})" title="Réinitialiser">x</button>`:""}
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="budget-line"><span class="bl-label" style="color:var(--text3);font-size:12px">Heures théoriques</span><span class="bl-val">${fmt(hTheo)}h</span></div>
+      <div class="budget-line"><span class="bl-label" style="color:var(--text3);font-size:12px">Après congés</span><span class="bl-val">${fmt(hConges)}h</span></div>
+      <div class="budget-line">
+        <span class="bl-label" style="font-weight:600">Réelles <span style="font-weight:400;color:var(--text3);font-size:11px">(-${rate}%)</span></span>
+        <span class="bl-val" style="font-size:15px;font-weight:600">${fmt(hReelles)}h</span>
+      </div>
+      <div class="budget-line">
+        <span class="bl-label" style="font-weight:600">Écart vs budget</span>
+        <span class="bl-val ${ecart>0?"red":"green"}" style="font-size:15px;font-weight:600">${ecart>0?"+":""}${fmt(ecart)}h</span>
+      </div>
+      <div class="divider"></div>
+      ${(()=>{
+        const H24=24*4.33;
+        const abs=Math.abs(ecart)/H24;
+        const entier=Math.floor(abs);
+        const reste=Math.round((abs-entier)*H24);
+        if(ecart>0){
+          return`<div style="background:#FFF5F5;border:1px solid #FFCCCC;border-radius:var(--radius-sm);padding:10px 12px">
+            <div style="font-size:10px;font-weight:500;color:#C0392B;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Trop d'heures -- contrats a retirer</div>
+            <div style="font-size:20px;font-weight:700;color:#C0392B;font-family:'DM Mono',monospace">-${entier} <span style="font-size:13px;font-weight:500">contrat${entier>1?"s":""} 24h</span></div>
+            ${reste>0?`<div style="font-size:11px;color:#C0392B;margin-top:2px;opacity:.8">+ ${reste}h restantes</div>`:""}
+            <div style="font-size:11px;color:var(--text3);margin-top:4px">${fmt(ecart)}h en trop / ${fmt(H24)}h par contrat</div>
+          </div>`;
+        } else if(ecart<0){
+          return`<div style="background:#F0FBF5;border:1px solid #A8DEBC;border-radius:var(--radius-sm);padding:10px 12px">
+            <div style="font-size:10px;font-weight:500;color:#1A7F4B;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Heures disponibles -- contrats a embaucher</div>
+            <div style="font-size:20px;font-weight:700;color:#1A7F4B;font-family:'DM Mono',monospace">+${entier} <span style="font-size:13px;font-weight:500">contrat${entier>1?"s":""} 24h</span></div>
+            ${reste>0?`<div style="font-size:11px;color:#1A7F4B;margin-top:2px;opacity:.8">+ ${reste}h disponibles</div>`:""}
+            <div style="font-size:11px;color:var(--text3);margin-top:4px">${fmt(Math.abs(ecart))}h disponibles / ${fmt(H24)}h par contrat</div>
+          </div>`;
+        } else {
+          return`<div style="background:var(--surface2);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--text3);text-align:center">Equilibre parfait</div>`;
+        }
+      })()}
+    </div>`;
+  }).join("");
+}
+
+function upd(i,f,v){ budgets[i][f]=f==="absPerso"?parseFloat(v):(parseFloat(v)||0); renderBudget(); }
+function resetAbs(i){ budgets[i].absPerso=null; renderBudget(); }
+function resetAllAbs(){ budgets.forEach(b=>b.absPerso=null); renderBudget(); }
+function syncAbs(){ document.getElementById("abs-global").value=document.getElementById("abs-setting").value; renderBudget(); }
+
+// ============================================================
+// EMPLOYEES
+// ============================================================
+function filtered() {
+  const s=(document.getElementById("search").value||"").toLowerCase();
+  const r=document.getElementById("f-rayon").value;
+  const c=document.getElementById("f-contrat").value;
+  const sortEl=document.getElementById("f-sort");
+  const sort=sortEl?sortEl.value:"";
+
+  let list=employees.filter(e=>{
+    if(s&&![e.nom,e.nomFamille,e.poste,e.note,e.matricule].some(v=>(v||"").toLowerCase().includes(s)))return false;
+    if(r&&e.rayon!==r&&!(e.multiRayon&&e.rayon2===r))return false;
+    if(c&&e.contrat!==c)return false;
+    return true;
+  });
+
+  if(sort){
+    list=[...list].sort((a,b)=>{
+      switch(sort){
+        case"nom-asc": return(a.nom||"").localeCompare(b.nom||"","fr");
+        case"nom-desc": return(b.nom||"").localeCompare(a.nom||"","fr");
+        case"rayon-asc": return(a.rayon||"").localeCompare(b.rayon||"","fr");
+        case"rayon-desc": return(b.rayon||"").localeCompare(a.rayon||"","fr");
+        case"contrat-asc": return(a.contrat||"").localeCompare(b.contrat||"");
+        case"contrat-desc": return(b.contrat||"").localeCompare(a.contrat||"");
+        case"heures-desc": return totalH(b)-totalH(a);
+        case"heures-asc": return totalH(a)-totalH(b);
+        case"datefin-asc":
+          if(!a.dateFin)return 1;
+          if(!b.dateFin)return -1;
+          return new Date(a.dateFin)-new Date(b.dateFin);
+        default: return 0;
+      }
+    });
+  }
+  return list;
+}
+
+function totalH(e) { return e.multiRayon ? (e.heures||0)+(e.heures2||0) : (e.heures||0); }
+function rayonLabel(e) {
+  if(!e.multiRayon) return `<span class="${RCC[e.rayon]}" style="font-size:12px;font-weight:500">${e.rayon.charAt(0)+e.rayon.slice(1).toLowerCase()}</span>`;
+  return `<span class="${RCC[e.rayon]}" style="font-size:12px;font-weight:500">${e.rayon.charAt(0)+e.rayon.slice(1).toLowerCase()}</span>
+    <span style="font-size:11px;color:var(--text3)"> + </span>
+    <span class="${RCC[e.rayon2]}" style="font-size:12px;font-weight:500">${e.rayon2.charAt(0)+e.rayon2.slice(1).toLowerCase()}</span>`;
+}
+function heuresLabel(e) {
+  const h = totalH(e);
+  if(e.multiRayon) return `<span class="badge ${h>=35?"b-full":"b-part"}">${e.heures}h+${e.heures2}h</span>`;
+  return `<span class="badge ${h>=35?"b-full":h>0?"b-part":"b-zero"}">${h>=35?"Complet":h>0?"Partiel":"--"} ${h}h</span>`;
+}
+
+function renderEmpTable() {
+  const list = filtered();
+  const activeCount = employees.filter(e=>totalH(e)>0).length;
+  const inactifCount = employees.filter(e=>totalH(e)===0).length;
+  const rayonFilter = document.getElementById("f-rayon").value;
+  const rayonColor = rayonFilter ? RC[rayonFilter] : null;
+  document.getElementById("emp-count-header").innerHTML = rayonFilter
+    ? `<span style="display:inline-flex;align-items:center;gap:6px;background:#F5F5F5;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:500;color:#000">
+        <span style="width:7px;height:7px;border-radius:50%;background:${rayonColor};display:inline-block"></span>
+        ${rayonFilter.charAt(0)+rayonFilter.slice(1).toLowerCase()}
+        <span onclick="resetRayonFilter()" style="cursor:pointer;color:#999;font-size:14px;line-height:1">x</span>
+       </span>`
+    : `${activeCount} employés actifs${inactifCount?" . "+inactifCount+" à 0h":""}`;
+  document.getElementById("count-label").textContent=`${list.length} employé${list.length>1?"s":""} affiché${list.length>1?"s":""}`;
+
+  // Desktop table
+  document.getElementById("emp-table").innerHTML=list.length?list.map(e=>`
+    <tr style="${totalH(e)===0?"opacity:.45":""}">
+      <td class="td-mat">${e.matricule||"--"}</td>
+      <td style="font-weight:500">${e.nom}${e.multiRayon?` <span style="font-size:10px;background:var(--purple-light);color:var(--purple);padding:1px 5px;border-radius:99px;font-family:'DM Mono',monospace">multi</span>`:""}</td>
+      <td style="color:var(--text2)">${e.nomFamille||""}</td>
+      <td>${rayonLabel(e)}</td>
+      <td style="color:var(--text2)">${e.poste||"--"}</td>
+      <td><span class="badge ${e.contrat==="CDI"?"b-cdi":"b-cdd"}">${e.contrat}</span></td>
+      <td>${heuresLabel(e)}</td>
+      <td style="color:var(--text3);font-size:12px;max-width:140px">${e.note||""}</td>
+      <td><button class="btn-icon" onclick="editEmpIdx(${employees.indexOf(e)})">&#9998;</button></td>
+    </tr>`).join(""):`<tr><td colspan="10" class="empty">Aucun résultat</td></tr>`;
+
+  // Mobile cards
+  document.getElementById("emp-cards").innerHTML=list.length?list.map(e=>`
+    <div class="emp-card" onclick="editEmpIdx(${employees.indexOf(e)})" style="${totalH(e)===0?"opacity:.45":""}">
+      <div class="emp-card-top">
+        <div>
+          <div class="emp-card-name">${e.nom}${e.nomFamille?" "+e.nomFamille.toUpperCase():""}${e.multiRayon?` <span style="font-size:10px;background:var(--purple-light);color:var(--purple);padding:1px 5px;border-radius:99px;font-family:'DM Mono',monospace">multi</span>`:""}
+          </div>
+          ${e.matricule?`<div class="emp-card-mat">#${e.matricule}</div>`:""}
+        </div>
+        <span style="font-size:18px;color:var(--text3)">></span>
+      </div>
+      <div class="emp-card-badges">
+        ${rayonLabel(e)}
+        ${e.poste?`<span style="font-size:12px;color:var(--text2)">. ${e.poste}</span>`:""}
+      </div>
+      <div class="emp-card-badges" style="margin-top:6px">
+        <span class="badge ${e.contrat==="CDI"?"b-cdi":"b-cdd"}">${e.contrat}</span>
+        ${heuresLabel(e)}
+      </div>
+      ${e.note?`<div class="emp-card-note">${e.note}</div>`:""}
+    </div>`).join(""):`<div class="empty">Aucun résultat</div>`;
+}
+
+// ============================================================
+// MODAL
+// ============================================================
+function toggleDateFin(contrat){
+  const row=document.getElementById("date-fin-row");
+  if(row) row.style.display=contrat==="CDD"?"block":"none";
+}
+
+function openModal(emp) {
+  editId=emp?emp.id:null;
+  document.getElementById("modal-title").textContent=emp?"Modifier l'employé":"Ajouter un employé";
+  document.getElementById("f-matricule").value=emp?emp.matricule:"";
+  document.getElementById("f-nom").value=emp?emp.nom:"";
+  document.getElementById("f-nomfamille").value=emp?emp.nomFamille:"";
+  document.getElementById("f-poste").value=emp?emp.poste:"";
+  document.getElementById("f-contrat-m").value=emp?emp.contrat:"CDI";
+  toggleDateFin(emp?emp.contrat:"CDI");
+  if(!emp) document.getElementById("f-datefin").value="";
+  document.getElementById("f-note").value=emp?emp.note:"";
+  document.getElementById("f-datefin").value=emp?emp.dateFin||"":"";
+  document.getElementById("btn-del").style.display=emp?"inline-flex":"none";
+  // Multi-rayon
+  const mr=emp&&emp.multiRayon;
+  toggleMultiRayon(!!mr);
+  if(mr){
+    document.getElementById("f-rayon-m2").value=emp.rayon||"FEMME";
+    document.getElementById("f-heures-m2").value=emp.heures||"";
+    document.getElementById("f-rayon2").value=emp.rayon2||"HOMME";
+    document.getElementById("f-heures2").value=emp.heures2||"";
+    updateTotalHeuresMulti();
+  } else {
+    document.getElementById("f-rayon-m").value=emp?emp.rayon:"FEMME";
+    document.getElementById("f-heures").value=emp?emp.heures:"";
+  }
+  document.getElementById("modal").classList.add("open");
+  setTimeout(()=>document.getElementById("f-matricule").focus(),100);
+}
+function closeModal(){ document.getElementById("modal").classList.remove("open"); }
+function editEmp(id){ openModal(employees.find(e=>e.id===id)); }
+function editEmpIdx(idx){ openModal(employees[idx]); }
+document.getElementById("modal").addEventListener("click",function(e){if(e.target===this)closeModal();});
+
+// ============================================================
+// EXPORT CSV
+// ============================================================
+function exportCSV(){
+  const h=["Matricule","Prénom","Nom","Rayon","Heures","Rayon secondaire","Heures secondaires","Multi-rayon","Poste","Contrat","Note"];
+  const rows=employees.map(e=>[e.matricule,e.nom,e.nomFamille||"",e.rayon,e.heures,e.rayon2||"",e.heures2||"",e.multiRayon?"Oui":"Non",e.poste,e.contrat,e.note]);
+  const csv=[h,...rows].map(r=>r.map(v=>`"${(v||"").toString().replace(/"/g,'""')}"`).join(",")).join("\n");
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"}));
+  a.download="employes_4407.csv"; a.click();
+}
+
+// ============================================================
+// PULL TO REFRESH
+// ============================================================
+let ptStartY=0, ptPulling=false;
+const PTR_THRESHOLD=80;
+
+document.addEventListener('touchstart',e=>{
+  if(window.scrollY===0) ptStartY=e.touches[0].clientY;
+},{ passive:true });
+
+document.addEventListener('touchmove',e=>{
+  if(ptStartY===0) return;
+  const dist=e.touches[0].clientY-ptStartY;
+  if(dist>PTR_THRESHOLD&&!ptPulling){
+    ptPulling=true;
+    const el=document.getElementById('ptr-indicator');
+    if(el) el.style.display='flex';
+  }
+},{ passive:true });
+
+document.addEventListener('touchend',async()=>{
+  if(ptPulling){
+    ptPulling=false; ptStartY=0;
+    const el=document.getElementById('ptr-indicator');
+    if(el){ el.querySelector('span').textContent='Chargement...'; }
+    await dbLoad();
+    renderDashboard(); renderBudget(); renderEmpTable();
+    if(el){ el.style.display='none'; el.querySelector('span').textContent='Relacher pour actualiser'; }
+  }
+  ptStartY=0;
+});
+
+
+const SURL="https://ixllpmxocfzysxuzijdr.supabase.co";
+const SKEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml4bGxwbXhvY2Z6eXN4dXppamRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0NTMwNTksImV4cCI6MjA5MTAyOTA1OX0.zTi4VmB0lFjRj_xzZze60RovG-d5fsqbXdIaZ4K9AO0";
+const sb=supabase.createClient(SURL,SKEY);
+
+function setSyncing(v){const d=document.getElementById("sync-dot");if(d)d.className="sync-dot"+(v?" busy":"")}
+let toastT;
+function showToast(msg,type="ok"){const t=document.getElementById("toast");t.textContent=msg;t.className="toast show "+type;clearTimeout(toastT);toastT=setTimeout(()=>t.className="toast",3000)}
+
+function dbToLocal(r){return{id:r.id,matricule:r.matricule||"",nom:r.nom||"",nomFamille:r.nom_famille||"",rayon:r.rayon||"FEMME",rayon2:r.rayon2||"",poste:r.poste||"",contrat:r.contrat||"CDI",heures:r.heures||0,heures2:r.heures2||0,note:r.note||"",multiRayon:r.multi_rayon||false,dateFin:r.date_fin||''}}
+function localToDb(e){return{matricule:e.matricule||null,nom:e.nom,nom_famille:e.nomFamille||null,rayon:e.rayon,rayon2:e.rayon2||null,poste:e.poste||null,contrat:e.contrat,heures:e.heures||0,heures2:e.heures2||0,note:e.note||null,multi_rayon:e.multiRayon||false,date_fin:e.dateFin||null}}
+
+const SEED=employees.map(e=>localToDb(e));
+
+async function dbLoad(){
+  const[s,b,emp]=await Promise.all([
+    sb.from("settings").select("*"),
+    sb.from("budgets").select("*"),
+    sb.from("employees").select("*").order("created_at")
+  ]);
+  if(s.data){const r=s.data.find(x=>x.key==="abs_global");if(r){document.getElementById("abs-global").value=r.value;document.getElementById("abs-setting").value=r.value;}}
+  if(b.data&&b.data.length){b.data.forEach(x=>{const i=x.mois_index;if(i>=0&&i<12){budgets[i].budget=x.budget??budgets[i].budget;budgets[i].conges=x.conges??budgets[i].conges;budgets[i].jours=x.jours??budgets[i].jours;budgets[i].absPerso=x.abs_perso!=null?x.abs_perso:null;}})}
+  if(emp.data) employees=emp.data.map(dbToLocal);
+  return emp.data?emp.data.length:0;
+}
+
+async function dbSaveBudget(i){
+  setSyncing(true);
+  const b=budgets[i];
+  await sb.from("budgets").upsert({mois_index:i,mois:b.mois,jours:b.jours,budget:b.budget,conges:b.conges,abs_perso:b.absPerso},{onConflict:"mois_index"});
+  setSyncing(false);
+}
+async function dbSaveSetting(key,value){await sb.from("settings").upsert({key,value:String(value)})}
+
+async function dbInsert(emp){
+  const{data,error}=await sb.from("employees").insert(localToDb(emp)).select().single();
+  if(error){showToast("Erreur sauvegarde","err");return null;}
+  return data.id;
+}
+async function dbUpdate(emp){
+  const{error}=await sb.from("employees").update(localToDb(emp)).eq("id",emp.id);
+  if(error)showToast("Erreur mise à jour","err");
+}
+async function dbDelete(id){
+  const{error}=await sb.from("employees").delete().eq("id",id);
+  if(error)showToast("Erreur suppression","err");
+}
+
+// ============================================================
+// OVERRIDE save/delete to use Supabase
+// ============================================================
+async function saveEmp(){
+  const nom=document.getElementById("f-nom").value.trim();
+  if(!nom){document.getElementById("f-nom").focus();return;}
+  setSyncing(true);
+  let emp;
+  if(isMultiRayon){
+    emp={id:editId,matricule:document.getElementById("f-matricule").value.trim(),nom,nomFamille:document.getElementById("f-nomfamille").value.trim(),poste:document.getElementById("f-poste").value.trim(),contrat:document.getElementById("f-contrat-m").value,note:document.getElementById("f-note").value.trim(),multiRayon:true,rayon:document.getElementById("f-rayon-m2").value,heures:parseInt(document.getElementById("f-heures-m2").value)||0,rayon2:document.getElementById("f-rayon2").value,heures2:parseInt(document.getElementById("f-heures2").value)||0,
+      dateFin:document.getElementById("f-datefin").value||""};
+  } else {
+    emp={id:editId,matricule:document.getElementById("f-matricule").value.trim(),nom,nomFamille:document.getElementById("f-nomfamille").value.trim(),rayon:document.getElementById("f-rayon-m").value,poste:document.getElementById("f-poste").value.trim(),contrat:document.getElementById("f-contrat-m").value,heures:parseInt(document.getElementById("f-heures").value)||0,note:document.getElementById("f-note").value.trim(),multiRayon:false,rayon2:"",heures2:0,dateFin:document.getElementById("f-datefin").value||""};
+  }
+  if(editId){
+    await dbUpdate(emp);
+    const i=employees.findIndex(e=>e.id===editId);
+    employees[i]=emp;
+    showToast("Modifie !");
+  } else {
+    const newId=await dbInsert(emp);
+    if(newId){emp.id=newId;employees.push(emp);showToast("Ajoute !");}
+  }
+  setSyncing(false);
+  closeModal();renderEmpTable();renderDashboard();renderBudget();
+}
+
+async function deleteEmp(){
+  if(!editId)return;
+  if(!confirm("Supprimer cet employé ?"))return;
+  setSyncing(true);
+  await dbDelete(editId);
+  employees=employees.filter(e=>e.id!==editId);
+  setSyncing(false);
+  showToast("Supprimé");
+  closeModal();renderEmpTable();renderDashboard();
+}
+
+// Override budget save
+const _origUpd=window.upd;
+function upd(i,f,v){
+  budgets[i][f]=f==="absPerso"?parseFloat(v):(parseFloat(v)||0);
+  renderBudget();
+  dbSaveBudget(i);
+}
+function resetAbs(i){budgets[i].absPerso=null;renderBudget();dbSaveBudget(i);}
+function resetAllAbs(){budgets.forEach((b,i)=>{b.absPerso=null;dbSaveBudget(i);});renderBudget();}
+function syncAbs(){
+  const v=document.getElementById("abs-setting").value;
+  document.getElementById("abs-global").value=v;
+  dbSaveSetting("abs_global",v);
+  renderBudget();
+}
+
+// ============================================================
+// AUTH -- Email + code PIN via allowed_users table
+// ============================================================
+function showAuthError(msg){
+  const el=document.getElementById("auth-error");
+  if(el){el.textContent=msg;el.style.display="block";}
+}
+function hideAuthError(){
+  const el=document.getElementById("auth-error");
+  if(el) el.style.display="none";
+}
+
+function showApp(){
+  document.getElementById("auth-screen").style.display="none";
+  document.getElementById("app-layout").style.display="flex";
+  const lel=document.getElementById("loading");if(lel){lel.classList.add("hidden");lel.style.cssText="display:none!important;visibility:hidden!important;opacity:0!important";}
+}
+
+function saveSession(email){
+  try{localStorage.setItem("bc4407_auth",email);}catch(e){}
+  try{sessionStorage.setItem("bc4407_auth",email);}catch(e){}
+}
+
+function getSession(){
+  try{const v=localStorage.getItem("bc4407_auth");if(v)return v;}catch(e){}
+  try{const v=sessionStorage.getItem("bc4407_auth");if(v)return v;}catch(e){}
+  return null;
+}
+
+function clearSession(){
+  try{localStorage.removeItem("bc4407_auth");}catch(e){}
+  try{sessionStorage.removeItem("bc4407_auth");}catch(e){}
+}
+
+async function login(){
+  hideAuthError();
+  const email=document.getElementById("auth-email").value.trim().toLowerCase();
+  const password=document.getElementById("auth-password").value.trim();
+  if(!email||!password){showAuthError("Remplissez les deux champs.");return;}
+  const btn=document.querySelector("#auth-screen button");
+  btn.textContent="Verification...";btn.disabled=true;
+  const{data,error}=await sb.from("allowed_users")
+    .select("email")
+    .eq("email",email)
+    .eq("password",password)
+    .single();
+  btn.textContent="Acceder";btn.disabled=false;
+  if(error||!data){
+    showAuthError("Email ou code incorrect.");
+    document.getElementById("auth-password").value="";
+    return;
+  }
+  saveSession(email);
+  showApp();
+  await loadAndRender();
+}
+
+function checkAuth(){
+  return !!getSession();
+}
+
+function logout(){
+  clearSession();
+  location.reload();
+}
+
+// ============================================================
+// LOAD & RENDER
+// ============================================================
+async function loadAndRender(){
+  document.getElementById("loading-text").textContent="Chargement...";
+  const count=await dbLoad();
+  if(count===0){
+    document.getElementById("loading-text").textContent="Import initial...";
+    const{error}=await sb.from("employees").insert(SEED.map(e=>({...e})));
+    if(!error){await dbLoad();showToast("Employes importes !");}
+  }
+  const lel=document.getElementById("loading");if(lel){lel.classList.add("hidden");lel.style.cssText="display:none!important;visibility:hidden!important;opacity:0!important";}
+  renderDashboard();
+  renderBudget();
+  renderEmpTable();
+}
+
+// ============================================================
+// INIT
+// ============================================================
+async function init(){
+  const dateShort=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"short",year:"numeric"});
+  const hd=document.getElementById("header-date"); if(hd) hd.textContent=dateShort;
+  const cd=document.getElementById("current-date"); if(cd) cd.textContent=new Date().toLocaleDateString("fr-FR",{month:"long",year:"numeric"});
+  // Hide loading spinner - auth screen handles display
+  const lel=document.getElementById("loading");if(lel){lel.classList.add("hidden");lel.style.cssText="display:none!important;visibility:hidden!important;opacity:0!important";}
+  if(checkAuth()){
+    showApp();
+    await loadAndRender();
+  }
+  // else: auth screen is visible, user needs to log in
+}
+init();
+</script>
+</body>
+</html>
